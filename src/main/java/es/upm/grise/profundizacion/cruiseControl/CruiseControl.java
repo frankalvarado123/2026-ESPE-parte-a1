@@ -10,14 +10,36 @@ public class CruiseControl {
 	/*
 	 * Constructor
 	 */
-	public CruiseControl(Speedometer speedometer) {}
+	public CruiseControl(Speedometer speedometer) {
+
+		this.speedSet = null;
+        this.speedLimit = null;
+
+	}
 	
 	
 	
 	/*
 	 * Method to code / test
 	 */
-	public void setSpeedSet(int speedSet) {}
+	public void setSpeedSet(int speedSet) {
+
+		    throws IncorrectSpeedSetException, SpeedSetAboveSpeedLimitException {
+
+        // Debe ser estrictamente mayor que cero
+        if (speedSet <= 0) {
+            throw new IncorrectSpeedSetException(
+                    "La velocidad programada debe ser mayor que cero");
+        }
+
+        // Si existe speedLimit, no puede superarlo
+        if (speedLimit != null && speedSet > speedLimit) {
+            throw new SpeedSetAboveSpeedLimitException(
+                    "La velocidad programada supera el límite permitido");
+        }
+
+        this.speedSet = speedSet;
+	}
 	
 	
 
@@ -43,3 +65,7 @@ public class CruiseControl {
 	}
 
 }
+
+
+    
+   
